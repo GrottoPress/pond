@@ -1,0 +1,11 @@
+name: pond
+version: 0.1.0
+description: Crystal WaitGroups without channels or counters
+
+authors:
+  - GrottoPress <info@grottopress.com>
+  - N Atta Kusi Adusei
+
+license: MIT
+
+crystal: ~> 1.0
