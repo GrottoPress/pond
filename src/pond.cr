@@ -44,6 +44,14 @@ class Pond
     end
   end
 
+  def self.drain(fiber : Fiber)
+    drain([fiber])
+  end
+
+  def self.drain(fibers : Array(Fiber))
+    new(fibers).drain
+  end
+
   private def remove_dead_fibers
     spawn do
       until @state.drained?

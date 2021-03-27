@@ -4,7 +4,7 @@
 
 ## Installation
 
-- Add the dependency to your `shard.yml`:
+1. Add the dependency to your `shard.yml`:
 
    ```yaml
    dependencies:
@@ -12,7 +12,7 @@
        github: GrottoPress/pond
    ```
 
-- Run `shards install`
+1. Run `shards install`
 
 ## Usage
 
@@ -73,6 +73,26 @@
 
   spawn { pond.drain } # <= Error!
   ````
+
+- Wait on a single existing fiber:
+
+  ```crystal
+  require "pond"
+
+  fiber = spawn { do_work }
+
+  Pond.drain(fiber) # <= Waits until fiber completes
+  ```
+
+- Wait on multiple existing fibers:
+
+  ```crystal
+  require "pond"
+
+  fibers = Array(Fiber).new(5, spawn { do_work })
+
+  Pond.drain(fibers) # <= Waits until all fibers complete
+  ```
 
 ## Development
 

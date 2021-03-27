@@ -37,4 +37,14 @@ describe Pond do
       errors.should contain(Pond::Error)
     end
   end
+
+  describe ".drain" do
+    it "waits for fiber to complete" do
+      count = Atomic(Int32).new(0)
+      fiber = spawn { count.add(1) }
+
+      Pond.drain(fiber)
+      count.lazy_get.should eq(1)
+    end
+  end
 end
