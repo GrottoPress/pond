@@ -29,7 +29,7 @@ class Pond
     self
   end
 
-  def drain
+  def drain : Nil
     ensure_same_fiber
     return if @state.drained?
 
