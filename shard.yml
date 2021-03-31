@@ -1,5 +1,5 @@
 name: pond
-version: 0.1.0
+version: 0.2.0
 description: Crystal WaitGroups without channels or counters
 
 authors:
