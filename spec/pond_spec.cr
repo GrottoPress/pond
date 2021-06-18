@@ -18,8 +18,10 @@ describe Pond do
       end
 
       pond.drain
+      pond.fill { count.add(1) }
+      pond.drain
 
-      count.lazy_get.should eq(n + 1)
+      count.lazy_get.should eq(n + 2)
     end
 
     it "raises when drained from another fiber" do

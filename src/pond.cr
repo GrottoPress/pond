@@ -2,18 +2,11 @@ require "./pond/version"
 require "./pond/**"
 
 class Pond
-  private enum State
-    Ready
-    Drained
-    Done
-  end
-
   def initialize(@fibers = Array(Fiber).new)
     @fiber = Fiber.current
     @mutex = Mutex.new
-    @state = State::Ready
 
-    remove_dead_fibers
+    spawn { remove_dead_fibers }
   end
 
   def <<(fiber)
@@ -30,18 +23,11 @@ class Pond
   end
 
   def drain : Nil
-    ensure_same_fiber
-    return if @state.drained?
-
-    until @fibers.all?(&.dead?)
-      Fiber.yield
+    if @fiber != Fiber.current
+      raise Error.new("Cannot drain pond from another fiber")
     end
 
-    sync { @state = State::Drained }
-
-    until @state.done?
-      Fiber.yield
-    end
+    remove_dead_fibers
   end
 
   def self.drain(fiber : Fiber)
@@ -53,21 +39,10 @@ class Pond
   end
 
   private def remove_dead_fibers
-    spawn do
-      until @state.drained?
-        sync { @fibers.reject!(&.dead?) }
-        Fiber.yield
-      end
-
-      sync { @state = State::Done }
+    until @fibers.all?(&.dead?)
+      Fiber.yield
+      sync { @fibers.reject!(&.dead?) }
     end
-  end
-
-  private def ensure_same_fiber
-    return if @fiber == Fiber.current
-
-    sync { @state = State::Drained }
-    raise Error.new("Cannot drain pond from another fiber")
   end
 
   private def sync

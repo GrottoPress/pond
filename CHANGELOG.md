@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Changed
+- Allow refilling and draining a drained pond
+
+### Changed
 - Replace travis-ci with GitHub actions
 
 ## [0.2.0] - 2021-03-31
