@@ -53,7 +53,7 @@ class Pond
   end
 
   private def remove_dead_fibers
-    until @fibers.all?(&.dead?)
+    until @fibers.empty?
       Fiber.yield
       sync { @fibers.reject!(&.dead?) }
     end
