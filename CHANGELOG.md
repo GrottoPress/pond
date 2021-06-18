@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Allow refilling and draining a drained pond
 
+### Added
+- Add `Pond#size` that returns number of fibers in a pond
+
 ### Changed
 - Replace travis-ci with GitHub actions
 

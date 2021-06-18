@@ -40,6 +40,33 @@ describe Pond do
     end
   end
 
+  describe "#size" do
+    it "returns number of fibers in the pond" do
+      pond = Pond.new
+
+      10.times do |_|
+        pond.fill { }
+      end
+
+      pond.fill do
+        pond.fill do
+          pond << spawn { }
+        end
+      end
+
+      pond.size.>(0).should be_true
+      pond.drain
+      pond.size.should eq(0)
+
+      pond.fill { }
+
+      pond.size.>(0).should be_true
+      pond.drain
+      pond.size.should eq(0)
+
+    end
+  end
+
   describe ".drain" do
     it "waits for fiber to complete" do
       count = Atomic(Int32).new(0)

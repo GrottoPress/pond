@@ -30,6 +30,8 @@ class Pond
     remove_dead_fibers
   end
 
+  delegate :size, to: @fibers
+
   def self.drain(fiber : Fiber)
     drain([fiber])
   end
