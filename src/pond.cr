@@ -5,8 +5,9 @@ class Pond
   def initialize(@fibers = Array(Fiber).new)
     @fiber = Fiber.current
     @mutex = Mutex.new
+    @done = false
 
-    spawn { remove_dead_fibers }
+    remove_dead_fibers_async
   end
 
   def <<(fiber)
@@ -28,6 +29,10 @@ class Pond
     end
 
     remove_dead_fibers
+
+    until @done
+      Fiber.yield
+    end
   end
 
   delegate :size, to: @fibers
@@ -38,6 +43,13 @@ class Pond
 
   def self.drain(fibers : Array(Fiber))
     new(fibers).drain
+  end
+
+  private def remove_dead_fibers_async
+    spawn do
+      remove_dead_fibers
+      @done = true
+    end
   end
 
   private def remove_dead_fibers
