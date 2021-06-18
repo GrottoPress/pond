@@ -26,17 +26,12 @@ describe Pond do
 
     it "raises when drained from another fiber" do
       pond = Pond.new
-      errors = Array(Exception.class).new
 
-      spawn do
-        pond.drain
-      rescue error
-        errors << error.class
+      pond.fill do
+        expect_raises(Pond::Error) { pond.drain }
       end
 
-      Fiber.yield
-
-      errors.should contain(Pond::Error)
+      pond.drain
     end
   end
 
