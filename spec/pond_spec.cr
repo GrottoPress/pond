@@ -33,6 +33,21 @@ describe Pond do
 
       pond.drain
     end
+
+    it "works for empty pond" do
+      Pond.new.drain.should be_nil
+    end
+
+    it "can be called consecutively in same fiber" do
+      pond = Pond.new
+
+      pond.fill { }
+
+      pond.drain
+      pond.drain
+
+      pond.drain.should be_nil
+    end
   end
 
   describe "#size" do
