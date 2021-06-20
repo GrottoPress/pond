@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Add `Pond#fill` overload that accepts an array of fibers
+
 ### Fixed
 - Ensure dead fibers continue to be removed whenever pond is refilled
 

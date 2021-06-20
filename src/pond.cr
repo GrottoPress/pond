@@ -8,10 +8,13 @@ class Pond
     @mutex = Mutex.new
   end
 
-  def self.new(fibers)
-    pond = new
-    fibers.each { |fiber| pond.fill(fiber) }
-    pond
+  def self.new(fibers) : self
+    new.fill(fibers)
+  end
+
+  def fill(fibers)
+    fibers.each { |fiber| fill(fiber) }
+    self
   end
 
   def <<(fiber)
