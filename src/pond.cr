@@ -39,9 +39,8 @@ class Pond
     ensure_same_fiber
     return unless @done == false
 
-    until @fibers.empty?
+    until @fibers.all?(&.dead?)
       Fiber.yield
-      sync { @fibers.reject!(&.dead?) }
     end
 
     sync { @done = nil } unless @done
@@ -51,7 +50,9 @@ class Pond
     end
   end
 
-  delegate :size, to: @fibers
+  def size
+    @fibers.count(&.dead?.!)
+  end
 
   def self.drain(fiber : Fiber)
     drain([fiber])
