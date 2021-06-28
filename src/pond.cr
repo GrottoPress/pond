@@ -63,7 +63,7 @@ class Pond
   end
 
   private def remove_dead_fibers
-    return unless @fibers.size == 1
+    return if @removing_dead
 
     spawn do
       until @done.nil?
@@ -71,8 +71,13 @@ class Pond
         Fiber.yield
       end
 
-      sync { @done = true }
+      sync do
+        @removing_dead = false
+        @done = true
+      end
     end
+
+    sync { @removing_dead = true }
   end
 
   private def ensure_same_fiber

@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Fixed
-- Fix segfault while removing dead fibers
+- Fix [segfault][segfault] while removing dead fibers
+
+[segfault]: https://github.com/GrottoPress/mel/runs/2932323566?check_suite_focus=true
 
 ## [0.3.1] - 2021-06-21
 
