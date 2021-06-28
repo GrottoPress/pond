@@ -63,7 +63,7 @@ class Pond
   end
 
   private def remove_dead_fibers
-    return unless size == 1
+    return unless @fibers.size == 1
 
     spawn do
       until @done.nil?
