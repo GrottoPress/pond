@@ -68,7 +68,9 @@ describe Pond do
       pond.drain
       pond.size.should eq(0)
 
-      pond.fill { }
+      10.times do |_|
+        pond.fill { }
+      end
 
       pond.size.should_not eq(0)
       pond.drain
