@@ -29,9 +29,9 @@ class Pond
     sync do
       @fibers << fiber
       @done = false
+      remove_dead_fibers
     end
 
-    remove_dead_fibers
     self
   end
 
@@ -80,7 +80,7 @@ class Pond
       end
     end
 
-    sync { @removing_dead = true }
+    @removing_dead = true
   end
 
   private def ensure_same_fiber
