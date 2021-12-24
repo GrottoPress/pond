@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add support for *Crystal* v1.2
 
+### Fixed
+- Clear *Pond* when all fibers are dead
+
 ## [0.3.2] - 2021-06-28
 
 ### Fixed

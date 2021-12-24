@@ -43,7 +43,10 @@ class Pond
       Fiber.yield
     end
 
-    sync { @done = nil } unless @done
+    sync do
+      @fibers.clear
+      @done = nil unless @done
+    end
 
     until @done
       Fiber.yield
