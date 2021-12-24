@@ -75,7 +75,6 @@ describe Pond do
       pond.size.should_not eq(0)
       pond.drain
       pond.size.should eq(0)
-
     end
   end
 
