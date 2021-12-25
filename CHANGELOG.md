@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Clear *Pond* when all fibers are dead
+- Check fiber is alive before adding to pond
 
 ## [0.3.2] - 2021-06-28
 

@@ -26,10 +26,12 @@ class Pond
   end
 
   def fill(fiber : Fiber)
-    sync do
-      @fibers << fiber
-      @done = false
-      remove_dead_fibers
+    unless fiber.dead?
+      sync do
+        @fibers << fiber
+        @done = false
+        remove_dead_fibers
+      end
     end
 
     self
