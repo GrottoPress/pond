@@ -41,14 +41,11 @@ class Pond
     ensure_same_fiber
     return unless @done == false
 
-    until @fibers.all?(&.dead?)
+    until @fibers.empty? || @done.nil?
       Fiber.yield
     end
 
-    sync do
-      @fibers.clear
-      @done = nil unless @done
-    end
+    sync { @done = nil } unless @done
 
     until @done
       Fiber.yield
