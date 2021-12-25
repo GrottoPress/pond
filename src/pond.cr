@@ -41,11 +41,14 @@ class Pond
     ensure_same_fiber
     return unless @done == false
 
-    until @fibers.empty? || @done.nil?
+    until size == 0
       Fiber.yield
     end
 
-    sync { @done = nil } unless @done
+    sync do
+      @fibers.clear
+      @done = nil unless @done
+    end
 
     until @done
       Fiber.yield
@@ -53,7 +56,7 @@ class Pond
   end
 
   def size
-    @fibers.count(&.dead?.!)
+    sync { @fibers.count(&.dead?.!) }
   end
 
   def self.drain(fiber : Fiber)
