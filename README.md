@@ -1,6 +1,6 @@
 # Pond
 
-**Pond** is a *Crystal* implementation of a *WaitGroup*, without channels, counters or *done* indicators. *Pond* automatically keeps track of all fibers it is made aware of, and waits until all of them complete execution.
+**Pond** is a *Crystal* implementation of a *WaitGroup*, without channels or counters. *Pond* automatically keeps track of all fibers it is made aware of, and waits until all of them complete execution.
 
 ## Installation
 
