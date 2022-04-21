@@ -9,8 +9,8 @@ on:
     paths:
       - '**.cr'
       - '.github/workflows/**'
-  # schedule:
-  #   - cron: '0 6 * * 6'
+  schedule:
+    - cron: '0 7 * * 6'
 jobs:
   checks:
     strategy:
