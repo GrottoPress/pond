@@ -60,10 +60,10 @@ class Pond
   end
 
   def self.drain(fiber : Fiber)
-    drain([fiber])
+    drain({fiber})
   end
 
-  def self.drain(fibers : Array(Fiber))
+  def self.drain(fibers : Indexable(Fiber))
     new(fibers).drain
   end
 

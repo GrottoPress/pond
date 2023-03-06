@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Update GitHub actions
+- Change argument type of `Pond.drain(Array(Fiber))` to `Indexable(Fiber)`
 
 ## [0.3.4] - 2022-03-17
 
