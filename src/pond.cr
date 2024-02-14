@@ -42,7 +42,7 @@ class Pond
     return unless @done == false
 
     until size == 0
-      Fiber.yield
+      sleep 1.microsecond
     end
 
     sync do
@@ -51,7 +51,7 @@ class Pond
     end
 
     until @done
-      Fiber.yield
+      sleep 1.microsecond
     end
   end
 
@@ -73,7 +73,7 @@ class Pond
     spawn do
       until @done.nil?
         sync { @fibers.reject!(&.dead?) }
-        Fiber.yield
+        sleep 1.microsecond
       end
 
       sync do
