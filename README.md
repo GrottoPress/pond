@@ -1,6 +1,6 @@
 # Pond
 
-**Pond** is a *Crystal* implementation of a *WaitGroup*, without channels or counters. *Pond* automatically keeps track of all fibers it is made aware of, and waits until all of them complete execution.
+**Pond** is a *Crystal* implementation of a *WaitGroup*, without channels or explicit counters. *Pond* automatically keeps track of all its fibers, and waits until all of them complete execution.
 
 ## Installation
 
@@ -16,21 +16,7 @@
 
 ## Usage
 
-- Add fibers and wait on them:
-
-  ```crystal
-  require "pond"
-
-  pond = Pond.new
-
-  1000.times do |_|
-    pond << spawn { do_work }
-  end
-
-  pond.drain # <= Waits for fibers to complete
-  ```
-
-- Let *Pond* spawn fibers and wait on them:
+- Spawn fibers and wait on them:
 
   ```crystal
   require "pond"
@@ -41,10 +27,10 @@
     pond.fill { do_work } # <= Spawns fiber and passes block to it
   end
 
-  pond.drain
+  pond.drain # <= Waits for fibers to complete
   ```
 
-- You may add *nested* fibers:
+- You may spawn *nested* fibers:
 
   In this case, all *ancestor* fibers have to be added to the pond, otherwise *Pond* can't guarantee any of them would complete.
 
@@ -62,7 +48,7 @@
   pond.drain
   ```
 
-  Note that, while you can add fibers to a pond that was created in a another fiber, draining has to be done in the same fiber the pond was created in. This is to prevent potential deadlocks.
+  Note that, while you can fill a pond that was created in a another fiber, draining has to be done in the same fiber the pond was created in. This is to prevent potential deadlocks.
 
   ```crystal
   require "pond"
@@ -73,26 +59,6 @@
 
   spawn { pond.drain } # <= Error!
   ````
-
-- Wait on a single existing fiber:
-
-  ```crystal
-  require "pond"
-
-  fiber = spawn { do_work }
-
-  Pond.drain(fiber) # <= Waits until fiber completes
-  ```
-
-- Wait on multiple existing fibers:
-
-  ```crystal
-  require "pond"
-
-  fibers = Array(Fiber).new(5, spawn { do_work })
-
-  Pond.drain(fibers) # <= Waits until all fibers complete
-  ```
 
 ## Development
 

@@ -13,7 +13,7 @@ describe Pond do
 
       pond.fill do
         pond.fill do
-          pond << spawn { count.add(1) }
+          pond.fill { count.add(1) }
         end
       end
 
@@ -60,7 +60,7 @@ describe Pond do
 
       pond.fill do
         pond.fill do
-          pond << spawn { }
+          pond.fill { }
         end
       end
 
@@ -75,16 +75,6 @@ describe Pond do
       pond.size.should_not eq(0)
       pond.drain
       pond.size.should eq(0)
-    end
-  end
-
-  describe ".drain" do
-    it "waits for fiber to complete" do
-      count = Atomic(Int32).new(0)
-      fiber = spawn { count.add(1) }
-
-      Pond.drain(fiber)
-      count.lazy_get.should eq(1)
     end
   end
 end

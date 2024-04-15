@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 
+
+### Changed
+- Replace internal fiber collection with an internal counter
+
+### Fixed
+- Reduce memory footprint for long running processes
+
+### Removed
+- Remove `Pond#<<` method
+- Remove `Pond.drain` methods
+- Remove `Pond.fill(Fiber)` overload
+- Remove `Pond.fill(Array(Fiber))` overload
+
 ## [1.0.1] - 2024-02-14
 
 ### Fixed
