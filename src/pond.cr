@@ -25,7 +25,7 @@ class Pond
     end
   end
 
-  def size
+  def size : Int32
     @counter.get
   end
 
