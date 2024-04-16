@@ -30,6 +30,18 @@
   pond.drain # <= Waits for fibers to complete
   ```
 
+  The code above is the same as:
+
+  ```crystal
+  require "pond"
+
+  Pond.drain do |pond|
+    1000.times do |_|
+      pond.fill { do_work }
+    end
+  end # <= Drains pond automatically at the end of the block
+  ```
+
 - You may spawn *nested* fibers:
 
   In this case, all *ancestor* fibers have to be added to the pond, otherwise *Pond* can't guarantee any of them would complete.

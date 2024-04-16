@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Add `Pond.drain(&)` class method
+
 ### Changed
 - Replace internal fiber collection with an internal counter
 
@@ -15,7 +18,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 - Remove `Pond#<<` method
-- Remove `Pond.drain` methods
+- Remove `Pond.drain(Fiber)` class method
+- Remove `Pond.drain(Array(Fiber))` class method
 - Remove `Pond.fill(Fiber)` overload
 - Remove `Pond.fill(Array(Fiber))` overload
 

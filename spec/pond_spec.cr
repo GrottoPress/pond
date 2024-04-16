@@ -25,13 +25,11 @@ describe Pond do
     end
 
     it "raises when drained from another fiber" do
-      pond = Pond.new
-
-      pond.fill do
-        expect_raises(Pond::Error) { pond.drain }
+      Pond.drain do |pond|
+        pond.fill do
+          expect_raises(Pond::Error) { pond.drain }
+        end
       end
-
-      pond.drain
     end
 
     it "works for empty pond" do

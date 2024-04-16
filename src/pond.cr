@@ -29,6 +29,11 @@ class Pond
     @counter.get
   end
 
+  def self.drain
+    yield pond = new
+    pond.drain
+  end
+
   private def ensure_same_fiber
     return if @fiber == Fiber.current
     raise Error.new("Cannot drain pond from another fiber")
