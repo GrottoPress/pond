@@ -20,8 +20,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Remove `Pond#<<` method
 - Remove `Pond.drain(Fiber)` class method
 - Remove `Pond.drain(Array(Fiber))` class method
-- Remove `Pond.fill(Fiber)` overload
-- Remove `Pond.fill(Array(Fiber))` overload
+- Remove `Pond#fill(Fiber)` overload
+- Remove `Pond#fill(Array(Fiber))` overload
 
 ## [1.0.1] - 2024-02-14
 
