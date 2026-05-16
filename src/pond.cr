@@ -7,7 +7,7 @@ class Pond
     @fiber = Fiber.current
   end
 
-  def fill(name = nil, same_thread = nil, &block)
+  def fill(name = nil, same_thread = false, &block)
     @counter.add(1)
 
     spawn(name: name, same_thread: same_thread) do
