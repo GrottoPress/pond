@@ -57,4 +57,4 @@ jobs:
       - name: Install shards
         run: shards update
       - name: Run tests
-        run: crystal spec --error-on-warnings -Dpreview_mt
+        run: crystal spec --error-on-warnings -Dpreview_mt -Dexecution_context
