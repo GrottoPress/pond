@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
+      - name: Update APT cache
+        run: sudo apt update
       - name: Download source
         uses: actions/checkout@v7
       - name: Install Crystal
@@ -42,6 +44,8 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
     steps:
+      - name: Update APT cache
+        run: sudo apt update
       - name: Download source
         uses: actions/checkout@v7
       - name: Install Crystal
